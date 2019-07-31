@@ -1,16 +1,7 @@
 <h1>ユーザー登録画面</h1>
 
-<% if @user.errors.any? %>
-  <div class="alert alert-warning">
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
 <%= bootstrap_form_with(model: @user, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
   <%= f.text_field :name, :placeholder => "名前を入力してください"%>
   <%= f.email_field :email, :placeholder => "メールアドレスを入力してください" %>
   <%= f.password_field :password, :placeholder => "パスワードを入力してください" %>
