@@ -1,12 +1,3 @@
 <h1>ユーザー登録画面</h1>
 
-<%= bootstrap_form_with(model: @user, local: true) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
-  <%= f.text_field :name, :placeholder => "名前を入力してください"%>
-  <%= f.email_field :email, :placeholder => "メールアドレスを入力してください" %>
-  <%= f.password_field :password, :placeholder => "パスワードを入力してください" %>
-  <%= f.password_field :password_confirmation, :placeholder => "パスワードを再入力してください" %>
-  <%= f.text_field :word, :placeholder => "一言を入力してください(任意)" %>
-  <%= f.text_field :url, :placeholder => "LINEのURLを入力してください(任意)" %>
-  <%= f.submit "登録" %>
-<% end %>
+<%= render partial: 'form', locals: { user: @user } %>
