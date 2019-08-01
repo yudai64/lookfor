@@ -1,5 +1,4 @@
 <%= bootstrap_form_with(model: user, local: true) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
   <%= f.text_field :name, :placeholder => "名前を入力してください"%>
   <%= f.email_field :email, :placeholder => "メールアドレスを入力してください" %>
   <%= f.password_field :password, :placeholder => "パスワードを入力してください" %>

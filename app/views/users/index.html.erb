@@ -10,7 +10,7 @@
     <% @users.each do |user| %>
     <tbody>
       <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= link_to user.name, user %></td>
         <td><%= user.word %></td>
         <td><%= user.url %></td>
       </tr>
