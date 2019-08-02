@@ -15,8 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = "登録しました"
-      redirect_to user_url(@user)
+      redirect_to user_url(@user), success: "登録しました"
     else
       render :new
     end
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to user_url(@user), notice: "編集しました"
+      redirect_to user_url(@user), success: "編集しました"
     else
       render :edit
     end
@@ -39,7 +38,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to root_url, notice: "ユーザー削除しました"
+    redirect_to root_url, success: "ユーザー削除しました"
   end
 
   private
