@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
 
   private
+    #ユーザーログインする
+    def login_user(user)
+      session[:user_id] = user.id
+    end
 
     #ログインしているユーザー所得する
     def current_user

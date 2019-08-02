@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: login_params[:email])
 
     if @user&.authenticate(login_params[:password])
-      session[:user_id] = @user.id
+      login_user(@user)
       redirect_to @user, success: "ログインしました"
     else
       flash.now[:danger] = "メールとパスワードの組み合わせが正しくありません"
