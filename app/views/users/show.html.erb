@@ -1,0 +1,17 @@
+<h1><%= @user.name %></h1>
+
+<table class="table mt-5">
+  <tbody>
+    <tr>
+      <th>一言</th>
+      <td><%= @user.word %></td>
+    </tr>
+    <tr>
+      <th>ライン</th>
+      <td><%= @user.url %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to '編集', edit_user_path, class: "btn mr-3" %>
+<%= link_to '削除', @user, method: :delete, data: { confirm: "削除してよろしいですか？"}, class: "btn" %>
