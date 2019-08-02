@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to user_url(@user), notice: "登録しました"
+      flash[:notice] = "登録しました"
+      redirect_to user_url(@user)
     else
       render :new
     end
