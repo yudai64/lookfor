@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   add_flash_types :success, :info, :warning, :danger
-  helper_method :current_user, :logged_in?
+  helper_method :login_user(user), :current_user, :logged_in?
 
   private
     #ユーザーログインする
