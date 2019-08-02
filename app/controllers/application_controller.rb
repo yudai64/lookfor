@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   add_flash_types :success, :info, :warning, :danger
   helper_method :current_user, :logged_in?
+  before_action :authenticate_user
 
   private
 
@@ -12,6 +13,11 @@ class ApplicationController < ActionController::Base
   #ログインしていればtrueしていなければfalseを返す
   def logged_in?
     current_user.present?
+  end
+
+  #ログイン済みユーザーかどうか確認
+  def authenticate_user
+    redirect_to login_path, danger: "ログインしてください" unless logged_in?
   end
 
 end
