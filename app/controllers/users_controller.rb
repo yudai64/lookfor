@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   def index
     @users = User.all
   end
@@ -46,6 +48,19 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :word, :url)
+    end
+
+    #beforeフィルター
+
+    #ログイン済みユーザーかどうか確認
+    def logged_in_user
+      redirect_to login_path, danger: "ログインしてください" unless logged_in?
+    end
+
+    #権限がない場合、自分のページに返す
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to current_user, danger: "権限がありません" unless current_user?(@user)
     end
 
 end
