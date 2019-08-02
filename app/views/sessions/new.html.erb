@@ -1,0 +1,7 @@
+<h1>ログイン</h1>
+
+<%= bootstrap_form_with(scope: :session, local: true) do |f| %>
+  <%= f.email_field :email, :placeholder => "メールアドレスを入力してください" %>
+  <%= f.password_field :password, :placeholder => "パスワードを入力してください" %>
+  <%= f.submit "login"%>
+<% end %>
