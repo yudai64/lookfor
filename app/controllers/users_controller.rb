@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user, only: [:new, :create,]
-  before_action :correct_user, only: [:edit, :update, :destroy]
   def index
     @users = User.all
   end
@@ -18,28 +17,28 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user(@user)
-      redirect_to user_url(@user), success: "登録しました"
+      redirect_to users_path, success: "登録しました"
     else
       render :new
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
 
     if @user.update(user_params)
-      redirect_to user_url(@user), success: "編集しました"
+      redirect_to users_path, success: "編集しました"
     else
       render :edit
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     redirect_to root_url, success: "ユーザー削除しました"
   end
@@ -48,14 +47,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :word, :url)
-    end
-
-    #beforeフィルター
-
-    #権限がない場合、自分のページに返す
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to current_user, danger: "権限がありません" unless current_user?(@user)
     end
 
 end
