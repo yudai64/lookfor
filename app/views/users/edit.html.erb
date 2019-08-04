@@ -1,3 +1,6 @@
 <h1>編集</h1>
 
 <%= render partial: 'form', locals: { user: @user } %>
+
+<h3 class="mt-5">アカウント削除</h3>
+<%= link_to "delete account", user_path, method: :delete, data: { confirm: "アカウント削除します。よろしいですか？ "}, class: "btn "%>
