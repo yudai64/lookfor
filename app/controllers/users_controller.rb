@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user(@user)
-      redirect_to users_path, success: "登録しました"
+      redirect_to "/profile", success: "登録しました"
     else
       render :new
     end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.update(user_params)
-      redirect_to users_path, success: "編集しました"
+      redirect_to "/profile", success: "編集しました"
     else
       render :edit
     end
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     @user = current_user
     @user.destroy
     redirect_to root_url, success: "ユーザー削除しました"
+  end
+
+  def profile
+    @user = current_user
   end
 
   private
