@@ -29,5 +29,9 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     redirect_to login_path, danger: "ログインしてください" unless logged_in?
   end
+  
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :word, :url)
+  end
 
 end
