@@ -1,15 +1,12 @@
 class ProfilesController < ApplicationController
   def show
-    @user = current_user
   end
 
   def edit
   end
 
   def update
-    @user = current_user
-
-    if @user.update(user_params)
+    if current_user.update(user_params)
       redirect_to profile_path, success: "編集しました"
     else
       render :edit
@@ -17,8 +14,14 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
-    @user = current_user
-    @user.destroy
+    current_user.destroy
     redirect_to root_url, success: "ユーザー削除しました"
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :word, :url)
+  end
+
 end
