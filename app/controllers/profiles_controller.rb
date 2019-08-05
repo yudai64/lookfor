@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     @user = current_user
 
     if @user.update(user_params)
-      redirect_to "/profile", success: "編集しました"
+      redirect_to profile_path, success: "編集しました"
     else
       render :edit
     end

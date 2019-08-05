@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user(@user)
-      redirect_to "/profile", success: "登録しました"
+      redirect_to profile_path, success: "登録しました"
     else
       render :new
     end
