@@ -1,0 +1,5 @@
+<h1>プロフィール編集</h1>
+
+<%= bootstrap_form_with url: profile_path, model: current_user, local: true do |form| %>
+  <%= render partial: 'shared/form', locals: { f: form } %>
+<% end %>
