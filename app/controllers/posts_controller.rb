@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :post_find, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
   def index
     @posts = Post.all.order(updated_at: "DESC")
   end
@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.new
+    @post = current_user.posts.build
   end
 
   def create
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :description)
     end
 
-    def post_find
+    def find_post
       @post = Post.find(params[:id])
     end
 end
