@@ -23,6 +23,6 @@
   <div class="card border-dark mb-3">
     <div class="card-header"><%= link_to post.title, post %></div>
     <div class="card-body"><%= simple_format(h(post.description), {}, sanitize: false, wrapper_tag: "div") %></div>
-    <div class="card-footer text-right"><%= link_to "編集", edit_post_path(post) %></div>
+    <div class="card-footer text-right"><%= link_to "編集", edit_post_path(post) %><%= link_to "削除", post, method: :delete, class: "ml-2", data: { confirm: "投稿削除します。よろしいですか？" } %></div>
   </div>
 <% end %>
