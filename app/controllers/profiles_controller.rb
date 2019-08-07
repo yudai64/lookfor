@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   def show
+    @posts = current_user.posts.order(updated_at: "DESC")
   end
 
   def edit

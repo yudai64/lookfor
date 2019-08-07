@@ -1,11 +1,7 @@
-<h1>プロフィール</h1>
+<h2><%= current_user.name %></h2>
 
 <table class="table mt-5">
   <tbody>
-    <tr>
-      <th>名前</th>
-      <td><%= current_user.name %></td>
-    </tr>
     <tr>
       <th>一言</th>
       <td><%= current_user.word %></td>
@@ -17,7 +13,16 @@
   </tbody>
 </table>
 
-
 <%= link_to "編集する", edit_profile_path%>
-<h3 class="mt-5">アカウント削除</h3>
+
+<h4 class="mt-5">アカウント削除</h4>
 <%= link_to "delete account", profile_path, method: :delete, data: { confirm: "アカウント削除します。よろしいですか？" } %>
+
+<h3 class="mt-5">投稿</h3>
+<% @posts.each do |post| %>
+  <div class="card border-dark mb-3">
+    <div class="card-header"><%= link_to post.title, post %></div>
+    <div class="card-body"><%= simple_format(h(post.description), {}, sanitize: false, wrapper_tag: "div") %></div>
+    <div class="card-footer text-right"><%= link_to "編集", edit_post_path(post) %></div>
+  </div>
+<% end %>
