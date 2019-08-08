@@ -1,0 +1,9 @@
+<h1 class="mb-5">投稿一覧</h1>
+
+<% @posts.each do |post| %>
+  <div class="card border-dark mb-3">
+    <div class="card-header"><%= link_to post.user.name, post.user %></div>
+    <div class="card-body"><%= link_to post.title, post %></div>
+    <div class="card-footer text-right"><%= "更新日 #{post.updated_at}" %></div>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<h2><%= @post.title %></h2>
+
+<table class="table mt-5">
+  <tbody>
+    <tr>
+      <th>投稿者</th>
+      <td><%= @post.user.name %></td>
+    </tr>
+    <tr>
+      <th>詳細</th>
+      <td><%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag: "div") %></td>
+    </tr>
+    <tr>
+      <th>更新日</th>
+      <td><%= @post.updated_at %></td>
+    </tr>
+  </tbody>
+</table>
