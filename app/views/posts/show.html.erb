@@ -16,3 +16,17 @@
     </tr>
   </tbody>
 </table>
+
+<h5 class="mt-5">コメント一覧</h5>
+<% @comments.each do |comment| %>
+  <%= link_to comment.user.name, comment.user %>
+  <%= comment.content %>
+  <br>
+<% end %>
+
+<h5 class="mt-5">コメントする</h5>
+<%= bootstrap_form_with(model:[@post, @comment], local: true) do |f| %>
+  <%= f.text_field :content %>
+  <br>
+  <%= f.submit '送信' %>
+<% end %>
