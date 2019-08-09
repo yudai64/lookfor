@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'users#new'
+  get 'static_pages/home'
+  root to: 'static_pages/home'
   resources :users, only: [:index, :show, :new, :create]
   resource :profile, only: [:show, :edit, :update, :destroy]
   resources :posts do
