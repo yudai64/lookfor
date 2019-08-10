@@ -1,10 +1,6 @@
 <header>
   <nav class="navbar navbar-fixed-top navbar-expand-md navbar-default bg-white mb-3">
-    <% if logged_in? %>
-      <%= link_to 'LookFor', "#", class: "navbar-brand text-secondary"%>
-    <% else %>
-      <%= link_to 'LookFor', root_path, class: "navbar-brand text-secondary" %>
-    <% end %>
+    <%= link_to 'LookFor', root_path, class: "navbar-brand text-secondary" %>
     <ul class="navbar-nav ml-auto">
       <% if logged_in? %>
       <li class="nav-item">
