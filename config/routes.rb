@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'static_pages/home'
   root to: 'static_pages#home'
   resources :users, only: [:index, :show, :new, :create]
   resource :profile, only: [:show, :edit, :update, :destroy]
