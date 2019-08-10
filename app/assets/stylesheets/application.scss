@@ -1,2 +1,12 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+
+body {
+  background-image: url("/images/coffee.png");
+  background-size: cover;
+  height: 600px;
+}
+
+.top-main {
+  text-align: center;
+}
