@@ -5,6 +5,7 @@ inherit_from: config/rubocop/rubocop.yml
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
-    - "vendor/**/*" # rubocop config/default.yml
-    - "db/schema*.rb"
-    - "db/migrate/**/*"
+    - vendor/**/* # rubocop config/default.yml
+    - db/schema*.rb
+    - db/migrate/**/*
+    - bin/*
