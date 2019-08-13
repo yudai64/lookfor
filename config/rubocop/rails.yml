@@ -35,7 +35,7 @@ Rails/Present:
   Enabled: false
 
 # method_missing を隠したい場合は respond_to? を使うべき
-Rails/SafeNavigation:
+Style/SafeNavigation:
   ConvertTry: true
 
 # valid? チェックし忘れを防ぎたい

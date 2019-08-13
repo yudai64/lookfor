@@ -167,8 +167,7 @@ Naming/UncommunicativeMethodParamName:
 
 # downcase or upcase しての比較はイディオムの域なので、多少の
 # パフォーマンスの違いがあろうが casecmp に変える意義を感じない
-Performance/Casecmp:
-  Enabled: false
+
 
 
 #################### Security ##############################
@@ -343,7 +342,7 @@ Style/RescueStandardError:
 # boolean を返すっぽく見えてしまうので無効に。
 # user && user.admin? なら短絡評価で nil が返ってくるのが一目で分かるので。
 # (boolean を返すメソッド以外なら積極的に使いたいんだけどねぇ
-#
+
 # 他に auto-correct してはいけないパターンとして
 #   if hoge && hoge.count > 1
 # がある。
