@@ -7,8 +7,3 @@ inherit_from:
 
 AllCops:
   TargetRubyVersion: 2.5
-  Exclude:
-    - vendor/**/* # rubocop config/default.yml
-    - db/schema*.rb
-    - db/migrate/**/*
-    - bin/*
