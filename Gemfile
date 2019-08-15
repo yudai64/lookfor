@@ -37,8 +37,10 @@ gem "jbuilder", "~> 2.5"
 gem "bootsnap", ">= 1.1.0", require: false
 
 group :development, :test do
+  gem "factory_bot_rails"
   gem "pry-byebug"
   gem "pry-rails"
+  gem "rspec-rails", "~> 3.8"
   gem "rubocop", "~> 0.74.0", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
