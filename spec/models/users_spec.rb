@@ -57,6 +57,12 @@ RSpec.describe User, type: :model do
       it { expect(association.macro).to eq :has_many }
 
       it { expect(association.class_name).to eq "Post"}
+
+      it "destroyed when user destroyed" do
+        user = create(:user)
+        user.posts.create(title: "title", description: "description")
+        expect{ user.destroy }.to change{ Post.count }.by(-1)
+      end
     end
 
     context "comment" do
@@ -65,6 +71,12 @@ RSpec.describe User, type: :model do
       it { expect(association.macro).to eq :has_many }
 
       it { expect(association.class_name).to eq "Comment"}
+
+      it "destroyed when user destroyed" do
+        user = create(:user)
+        user.comments.create(content: "content")
+        expect{ user.destroy }.to change{ Comment.count }.by(-1)
+      end
     end
   end
 end
