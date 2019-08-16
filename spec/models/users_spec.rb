@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe User do
+RSpec.describe User, type: :model do
   describe "#create" do
     it "is valid with a name, email, password, password_confirmation" do
       user = build(:user)
@@ -43,6 +43,28 @@ describe User do
       user = build(:user, password_confirmation: "password2")
       user.valid?
       expect(user.valid?).to eq(false)
+    end
+  end
+
+  describe "Association" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "post" do
+      let(:target) { :posts }
+
+      it { expect(association.macro).to eq :has_many }
+
+      it { expect(association.class_name).to eq "Post"}
+    end
+
+    context "comment" do
+      let(:target) { :comments }
+
+      it { expect(association.macro).to eq :has_many }
+
+      it { expect(association.class_name).to eq "Comment"}
     end
   end
 end
