@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
 
     it "is invalid duplicate email address" do
       create(:user)
-      user2 = build(:user, name: "user2", password: "password2", password: "password2")
+      user2 = build(:user, name: "user2")
       user2.valid?
       expect(user2.valid?).to eq(false)
     end
