@@ -39,8 +39,9 @@ RSpec.describe Post, type: :model do
       it { expect(association.class_name).to eq "Comment" }
 
       it "destroyed when post destroyed" do
-        post = create(:post)
-        post.comments.create(content: "コメントです")
+        user = create(:user)
+        post = create(:post, user: user)
+        user.comments.create!(content: "コメントです", post: post)
         expect{ post.destroy }.to change{ Comment.count }.by(-1)
       end
     end

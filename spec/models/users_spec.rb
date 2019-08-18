@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
 
       it "destroyed when user destroyed" do
         user = create(:user)
-        user.posts.create(title: "title", description: "description")
+        user.posts.create!(title: "これはタイトルです", description: "これは詳細です")
         expect{ user.destroy }.to change{ Post.count }.by(-1)
       end
     end
@@ -74,7 +74,8 @@ RSpec.describe User, type: :model do
 
       it "destroyed when user destroyed" do
         user = create(:user)
-        user.comments.create(content: "content")
+        post = create(:post, user: user)
+        user.comments.create!(content: "contentです", post: post)
         expect{ user.destroy }.to change{ Comment.count }.by(-1)
       end
     end
