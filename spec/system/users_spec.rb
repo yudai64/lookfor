@@ -80,17 +80,15 @@ describe "ユーザー機能", type: :system do
   describe "自ユーザー削除機能" do
     before do
       visit profile_path
+      click_link "delete account"
     end
 
     it "ユーザーAを削除する" do
-       click_link "delete account"
-
        # ダイアログの確認、削除後のメッセージの確認、userが減っているのを確認
        expect {
          page.accept_confirm "アカウント削除します。よろしいですか？"
          expect(page).to have_content "ユーザー削除しました"
        }.to change { User.count }.by(-1)
-
     end
   end
 end
