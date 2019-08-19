@@ -7,10 +7,7 @@ describe "投稿機能", type: :system do
     post_a = create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
     post_b = create(:post, title: "タイトルB", description: "Bの投稿です", user: user_b)
     user_a.comments.create!(content: "コメントA", post: post_b)
-    visit login_path
-    fill_in "Email", with: "a@example.com"
-    fill_in "Password", with: "password"
-    click_button "login"
+    login
   end
 
   describe "新規投稿一覧機能" do
@@ -109,11 +106,13 @@ describe "投稿機能", type: :system do
     end
 
     it "投稿Aを削除する" do
-       # ダイアログの確認、削除後のメッセージの確認、postが減っているのを確認
-       expect {
-         page.accept_confirm "投稿削除します。よろしいですか？"
-         expect(page).to have_content "投稿を削除しました"
-       }.to change { Post.count }.by(-1)
-    end
+       expect(page.driver.browser.switch_to.alert.text).to eq "投稿削除します。よろしいですか？"
+
+       page.driver.browser.switch_to.alert.accept
+
+       expect(page).to have_content "投稿を削除しました"
+
+       expect(page).not_to have_content "タイトルA"
+     end
   end
 end

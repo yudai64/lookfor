@@ -3,11 +3,8 @@ require "rails_helper"
 describe "ユーザー機能", type: :system do
   before do
     user_a = create(:user, name: "ユーザーA", email: "a@example.com")
-    post_a = create(:post, title: "タイトルA", user: user_a)
-    visit login_path
-    fill_in "Email", with: "a@example.com"
-    fill_in "Password", with: "password"
-    click_button "login"
+    create(:post, title: "タイトルA", user: user_a)
+    login
   end
 
   describe "全ユーザー一覧表示機能" do
@@ -84,11 +81,13 @@ describe "ユーザー機能", type: :system do
     end
 
     it "ユーザーAを削除する" do
-       # ダイアログの確認、削除後のメッセージの確認、userが減っているのを確認
-       expect {
-         page.accept_confirm "アカウント削除します。よろしいですか？"
-         expect(page).to have_content "ユーザー削除しました"
-       }.to change { User.count }.by(-1)
+      expect(page.driver.browser.switch_to.alert.text).to eq "アカウント削除します。よろしいですか？"
+
+      page.driver.browser.switch_to.alert.accept
+
+      expect(page).to have_content "ユーザー削除しました"
+
+      expect(page).not_to have_content "ユーザーA"
     end
   end
 end
