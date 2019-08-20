@@ -4,7 +4,7 @@ describe "コメント機能", type: :system do
   before do
     user_a = create(:user, name: "ユーザーA", email: "a@example.com")
     create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
-    login
+    login(user_a)
     visit posts_path
     click_link "タイトルA"
     fill_in "Content", with: content

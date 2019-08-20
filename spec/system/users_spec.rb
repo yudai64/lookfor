@@ -4,7 +4,7 @@ describe "ユーザー機能", type: :system do
   before do
     user_a = create(:user, name: "ユーザーA", email: "a@example.com")
     create(:post, title: "タイトルA", user: user_a)
-    login
+    login(user_a)
   end
 
   describe "全ユーザー一覧表示機能" do

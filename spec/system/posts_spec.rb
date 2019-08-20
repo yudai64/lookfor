@@ -3,11 +3,11 @@ require "rails_helper"
 describe "投稿機能", type: :system do
   before do
     user_a = create(:user, name: "ユーザーA", email: "a@example.com")
-    user_b = create(:user, name: "ユーザーB", email: "b@example.com")
+    user_b = create(:user, name: "ユーザーB", email: "user_b@example.com")
     post_a = create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
     post_b = create(:post, title: "タイトルB", description: "Bの投稿です", user: user_b)
     user_a.comments.create!(content: "コメントA", post: post_b)
-    login
+    login(user_a)
   end
 
   describe "新規投稿一覧機能" do
