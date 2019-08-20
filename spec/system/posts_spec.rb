@@ -105,14 +105,22 @@ describe "投稿機能", type: :system do
       click_link "削除"
     end
 
-    it "投稿Aを削除する" do
-       expect(page.driver.browser.switch_to.alert.text).to eq "投稿削除します。よろしいですか？"
+    context "OKを押した場合" do
+      it "投稿Aは削除される" do
+         page.accept_confirm "投稿削除します。よろしいですか？"
 
-       page.driver.browser.switch_to.alert.accept
+         expect(page).to have_content "投稿を削除しました"
 
-       expect(page).to have_content "投稿を削除しました"
-
-       expect(page).not_to have_content "タイトルA"
+         expect(page).not_to have_content "タイトルA"
+       end
      end
+
+     context "キャンセルを押した場合" do
+       it "投稿Aは削除されない" do
+          page.dismiss_confirm "投稿削除します。よろしいですか？"
+
+          expect(page).to have_content "タイトルA"
+        end
+      end
   end
 end

@@ -80,14 +80,22 @@ describe "ユーザー機能", type: :system do
       click_link "delete account"
     end
 
-    it "ユーザーAを削除する" do
-      expect(page.driver.browser.switch_to.alert.text).to eq "アカウント削除します。よろしいですか？"
+    context "OKを押した場合" do
+      it "ユーザーAは削除される" do
+        page.accept_confirm "アカウント削除します。よろしいですか？"
 
-      page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "ユーザー削除しました"
 
-      expect(page).to have_content "ユーザー削除しました"
+        expect(page).not_to have_content "ユーザーA"
+      end
+    end
 
-      expect(page).not_to have_content "ユーザーA"
+    context "キャンセルを押した場合" do
+      it "ユーザーAは削除されない" do
+        page.dismiss_confirm "アカウント削除します。よろしいですか？"
+
+        expect(page).to have_content "ユーザーA"
+      end
     end
   end
 end
