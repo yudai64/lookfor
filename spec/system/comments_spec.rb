@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe "コメント機能", type: :system do
+  let(:post) { create :post }
+  
   before do
-    user_a = create(:user, name: "ユーザーA", email: "a@example.com")
-    create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
-    login(user_a)
+    login(post.user)
     visit posts_path
-    click_link "タイトルA"
+    click_link "テストです"
     fill_in "Content", with: content
     click_button "送信"
   end
