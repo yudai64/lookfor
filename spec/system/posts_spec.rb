@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe "投稿機能", type: :system do
+  let(:user_a) { create(:user, name: "ユーザーA", email: "a@example.com") }
+  
   before do
-    user_a = create(:user, name: "ユーザーA", email: "a@example.com")
-    user_b = create(:user, name: "ユーザーB", email: "user_b@example.com")
     post_a = create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
-    post_b = create(:post, title: "タイトルB", description: "Bの投稿です", user: user_b)
-    user_a.comments.create!(content: "コメントA", post: post_b)
+    post_a.comments.create!(content: "コメントA", user: user_a)
+    create(:post, title: "タイトルB", description: "Bの投稿です")
     login(user_a)
   end
 
@@ -64,11 +64,11 @@ describe "投稿機能", type: :system do
   describe "投稿詳細機能" do
     before do
       visit posts_path
-      click_link "タイトルB"
+      click_link "タイトルA"
     end
 
-    it "投稿Bの詳細が表示される" do
-      expect(page).to have_content "Bの投稿です"
+    it "投稿Aの詳細が表示される" do
+      expect(page).to have_content "Aの投稿です"
     end
 
     it "Aのコメントが表示される" do
@@ -112,15 +112,15 @@ describe "投稿機能", type: :system do
          expect(page).to have_content "投稿を削除しました"
 
          expect(page).not_to have_content "タイトルA"
-       end
-     end
-
-     context "キャンセルを押した場合" do
-       it "投稿Aは削除されない" do
-          page.dismiss_confirm "投稿削除します。よろしいですか？"
-
-          expect(page).to have_content "タイトルA"
-        end
       end
+    end
+
+    context "キャンセルを押した場合" do
+      it "投稿Aは削除されない" do
+        page.dismiss_confirm "投稿削除します。よろしいですか？"
+
+        expect(page).to have_content "タイトルA"
+      end
+    end
   end
 end
