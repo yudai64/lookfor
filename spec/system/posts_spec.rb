@@ -1,16 +1,14 @@
 require "rails_helper"
 
 describe "投稿機能", type: :system do
-  let(:user_a) { create(:user, name: "ユーザーA", email: "a@example.com") }
-  
+  let(:user) { create(:user) }
+
   before do
-    post_a = create(:post, title: "タイトルA", description: "Aの投稿です", user: user_a)
-    post_a.comments.create!(content: "コメントA", user: user_a)
-    create(:post, title: "タイトルB", description: "Bの投稿です")
-    login(user_a)
+    post = create(:post, user: user)
+    login(user)
   end
 
-  describe "新規投稿一覧機能" do
+  describe "新規投稿機能" do
     before do
       visit new_post_path
       fill_in "Title", with: post_title
@@ -19,17 +17,17 @@ describe "投稿機能", type: :system do
     end
 
     context "どちらも入力したとき" do
-      let(:post_title) { "テスト投稿" }
-      let(:post_description) { "テスト投稿です" }
+      let(:post_title) { "新規投稿のタイトル" }
+      let(:post_description) { "新規投稿の詳細" }
 
       it "正常に投稿される" do
-        expect(page).to have_content "テスト投稿"
+        expect(page).to have_content "新規投稿のタイトル"
       end
     end
 
     context "Titleが空欄のとき" do
       let(:post_title) { "" }
-      let(:post_description) { "テスト投稿です" }
+      let(:post_description) { "新規投稿のタイトル" }
 
       it "失敗する" do
         expect(page).to have_content "can't be blank"
@@ -37,7 +35,7 @@ describe "投稿機能", type: :system do
     end
 
     context "Descriptionが空欄のとき" do
-      let(:post_title) { "テスト投稿" }
+      let(:post_title) { "新規投稿の詳細" }
       let(:post_description) { "" }
 
       it "失敗する" do
@@ -49,11 +47,13 @@ describe "投稿機能", type: :system do
 
   describe "投稿一覧機能" do
     before do
+      user_b = create(:user, name: "ユーザーB", email: "b@example.com")
+      create(:post, title: "タイトルB", description: "Bの投稿です", user: user_b)
       visit posts_path
     end
 
-    it "投稿Aが表示される" do
-      expect(page).to have_content "タイトルA"
+    it "テスト投稿が表示される" do
+      expect(page).to have_content "テスト投稿"
     end
 
     it "投稿Bが表示される" do
@@ -63,16 +63,17 @@ describe "投稿機能", type: :system do
 
   describe "投稿詳細機能" do
     before do
+      post.comments.create!(user: user)
       visit posts_path
-      click_link "タイトルA"
+      click_link "テスト投稿"
     end
 
-    it "投稿Aの詳細が表示される" do
-      expect(page).to have_content "Aの投稿です"
+    it "テスト投稿の詳細が表示される" do
+      expect(page).to have_content "これはテスト詳細です"
     end
 
-    it "Aのコメントが表示される" do
-      expect(page).to have_content "コメントA"
+    it "テスト投稿のコメントが表示される" do
+      expect(page).to have_content "テストコメント"
     end
   end
 
@@ -82,20 +83,20 @@ describe "投稿機能", type: :system do
       click_link "編集"
     end
 
-    it "投稿Aを編集する" do
+    it "テスト投稿を編集する" do
       # TitleにタイトルAが入力されていることを確認
-        expect(page).to have_field "Title", with: "タイトルA"
+        expect(page).to have_field "Title", with: "テスト投稿"
       # Descriptionにが入力されていることを確認
-        expect(page).to have_field "Description", with: "Aの投稿です"
+        expect(page).to have_field "Description", with: "これはテスト詳細です"
 
-        fill_in "Title", with: "編集済み投稿A"
+        fill_in "Title", with: "編集済み投稿"
         fill_in "Description", with: "詳細を編集した"
         click_button "投稿"
 
         # 投稿を編集しましたと表示されるか確認
         expect(page).to have_content "投稿を編集しました"
         # 編集済み投稿Aが表示されていることを確認
-        expect(page).to have_content "編集済み投稿A"
+        expect(page).to have_content "編集済み投稿"
     end
   end
 
@@ -106,12 +107,12 @@ describe "投稿機能", type: :system do
     end
 
     context "OKを押した場合" do
-      it "投稿Aは削除される" do
+      it "テスト投稿は削除される" do
          page.accept_confirm "投稿削除します。よろしいですか？"
 
          expect(page).to have_content "投稿を削除しました"
 
-         expect(page).not_to have_content "タイトルA"
+         expect(page).not_to have_content "テスト投稿"
       end
     end
 
@@ -119,7 +120,7 @@ describe "投稿機能", type: :system do
       it "投稿Aは削除されない" do
         page.dismiss_confirm "投稿削除します。よろしいですか？"
 
-        expect(page).to have_content "タイトルA"
+        expect(page).to have_content "テスト投稿"
       end
     end
   end
