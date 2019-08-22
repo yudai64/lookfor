@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe "コメント機能", type: :system do
   let(:post) { create :post }
-  
+
   before do
     login(post.user)
     visit posts_path
-    click_link "テストです"
+    click_link "テスト投稿"
     fill_in "Content", with: content
     click_button "送信"
   end
