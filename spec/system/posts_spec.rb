@@ -5,6 +5,7 @@ describe "投稿機能", type: :system do
 
   before do
     post = create(:post, user: user)
+    create(:comment, user: user, post: post)
     login(user)
   end
 
@@ -63,7 +64,6 @@ describe "投稿機能", type: :system do
 
   describe "投稿詳細機能" do
     before do
-      post.comments.create!(user: user)
       visit posts_path
       click_link "テスト投稿"
     end
