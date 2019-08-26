@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :post do
-    title { "テストです" }
-    description { "これはテストです" }
+    title { "テスト投稿" }
+    description { "これはテスト詳細です" }
     user
   end
 end
