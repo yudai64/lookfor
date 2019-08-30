@@ -15,7 +15,7 @@ RSpec.describe Comment, type: :model do
 
   describe "Association" do
     let(:association) do
-      described_class.reflect_on_association(target)
+      Comment.reflect_on_association(target)
     end
 
     context "user" do

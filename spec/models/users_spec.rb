@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
 
   describe "Association" do
     let(:association) do
-      described_class.reflect_on_association(target)
+      User.reflect_on_association(target)
     end
 
     context "post" do
