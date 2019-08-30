@@ -45,7 +45,5 @@ RSpec.describe Post, type: :model do
         expect { post.destroy }.to change { Comment.count }.by(-1)
       end
     end
-
-
   end
 end

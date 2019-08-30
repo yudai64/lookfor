@@ -43,7 +43,6 @@ describe "投稿機能", type: :system do
         expect(page).to have_content "can't be blank"
       end
     end
-
   end
 
   describe "投稿一覧機能" do
