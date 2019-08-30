@@ -11,6 +11,7 @@ jobs:
         environment:
           RAILS_ENV: test
           POSTGRES_HOST: 127.0.0.1
+          BUNDLER_VERSION: 2.0.2
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -25,6 +26,15 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: setup bundler
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            sudo gem install bundler
 
       # Download and cache dependencies
       - restore_cache:
