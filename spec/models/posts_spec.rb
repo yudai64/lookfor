@@ -28,7 +28,7 @@ RSpec.describe Post, type: :model do
 
       it { expect(association.macro).to eq :belongs_to }
 
-      it { expect(association.class_name).to eq "User"}
+      it { expect(association.class_name).to eq "User" }
     end
 
     context "comment" do
@@ -42,7 +42,7 @@ RSpec.describe Post, type: :model do
         user = create(:user)
         post = create(:post, user: user)
         user.comments.create!(content: "コメントです", post: post)
-        expect{ post.destroy }.to change{ Comment.count }.by(-1)
+        expect { post.destroy }.to change { Comment.count }.by(-1)
       end
     end
 

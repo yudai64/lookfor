@@ -23,7 +23,7 @@ RSpec.describe Comment, type: :model do
 
       it { expect(association.macro).to eq :belongs_to }
 
-      it { expect(association.class_name).to eq "User"}
+      it { expect(association.class_name).to eq "User" }
     end
 
     context "post" do
