@@ -84,18 +84,18 @@ describe "投稿機能", type: :system do
 
     it "テスト投稿を編集する" do
       # TitleにタイトルAが入力されていることを確認
-        expect(page).to have_field "Title", with: "テスト投稿"
+      expect(page).to have_field "Title", with: "テスト投稿"
       # Descriptionにが入力されていることを確認
-        expect(page).to have_field "Description", with: "これはテスト詳細です"
+      expect(page).to have_field "Description", with: "これはテスト詳細です"
 
-        fill_in "Title", with: "編集済み投稿"
-        fill_in "Description", with: "詳細を編集した"
-        click_button "投稿"
+      fill_in "Title", with: "編集済み投稿"
+      fill_in "Description", with: "詳細を編集した"
+      click_button "投稿"
 
-        # 投稿を編集しましたと表示されるか確認
-        expect(page).to have_content "投稿を編集しました"
-        # 編集済み投稿Aが表示されていることを確認
-        expect(page).to have_content "編集済み投稿"
+      # 投稿を編集しましたと表示されるか確認
+      expect(page).to have_content "投稿を編集しました"
+      # 編集済み投稿Aが表示されていることを確認
+      expect(page).to have_content "編集済み投稿"
     end
   end
 
@@ -107,11 +107,11 @@ describe "投稿機能", type: :system do
 
     context "OKを押した場合" do
       it "テスト投稿は削除される" do
-         page.accept_confirm "投稿削除します。よろしいですか？"
+        page.accept_confirm "投稿削除します。よろしいですか？"
 
-         expect(page).to have_content "投稿を削除しました"
+        expect(page).to have_content "投稿を削除しました"
 
-         expect(page).not_to have_content "テスト投稿"
+        expect(page).not_to have_content "テスト投稿"
       end
     end
 
