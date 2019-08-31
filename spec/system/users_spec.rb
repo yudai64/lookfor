@@ -59,18 +59,16 @@ describe "ユーザー機能", type: :system do
     end
 
     it "テストユーザーを編集する" do
-    # NameにユーザーAが入力されていることを確認
       expect(page).to have_field "Name", with: "テストユーザー"
-    # Emailにa@example.comが入力されていることを確認
+
       expect(page).to have_field "Email", with: "test@example.com"
 
       fill_in "Name", with: "編集済みユーザー"
       fill_in "Email", with: "edit@example.com"
       click_button "Update User"
 
-      # 編集しましたと表示されるか確認
       expect(page).to have_content "編集しました"
-      # 編集済みユーザーAが表示されていることを確認
+
       expect(page).to have_content "編集済みユーザー"
     end
   end
