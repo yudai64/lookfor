@@ -58,23 +58,17 @@ describe "ユーザー機能", type: :system do
       visit edit_profile_path
     end
 
-    it "テストユーザーが画面に表示される" do
+    it "ユーザーは編集される" do
       expect(page).to have_field "Name", with: "テストユーザー"
-    end
 
-    it "テストユーザーのメールが画面に表示される" do
       expect(page).to have_field "Email", with: "test@example.com"
-    end
 
-    fill_in "Name", with: "編集済みユーザー"
-    fill_in "Email", with: "edit@example.com"
-    click_button "Update User"
+      fill_in "Name", with: "編集済みユーザー"
+      fill_in "Email", with: "edit@example.com"
+      click_button "Update User"
 
-    it "編集しましたと画面に表示される" do
       expect(page).to have_content "編集しました"
-    end
 
-    it "編集済みユーザーが画面に表示される" do
       expect(page).to have_content "編集済みユーザー"
     end
   end
@@ -86,15 +80,11 @@ describe "ユーザー機能", type: :system do
     end
 
     context "OKを押した場合" do
-      before do
-        page.accept_confirm "アカウント削除します。よろしいですか？"
-      end
-
-      it "ユーザー消去しましたと画面に表示される" do
-        expect(page).to have_content "ユーザー削除しました"
-      end
-
       it "テストユーザーは削除される" do
+        page.accept_confirm "アカウント削除します。よろしいですか？"
+
+        expect(page).to have_content "ユーザー削除しました"
+
         expect(page).not_to have_content "テストユーザー"
       end
     end
