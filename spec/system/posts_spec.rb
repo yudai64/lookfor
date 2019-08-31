@@ -82,19 +82,23 @@ describe "投稿機能", type: :system do
       click_link "編集"
     end
 
-    it "テスト投稿を編集する" do
-      # TitleにタイトルAが入力されていることを確認
+    it "TitleにタイトルAが入力されている" do
       expect(page).to have_field "Title", with: "テスト投稿"
-      # Descriptionにが入力されていることを確認
+    end
+
+    it "Descriptionにが入力されていることを確認" do
       expect(page).to have_field "Description", with: "これはテスト詳細です"
+    end
 
-      fill_in "Title", with: "編集済み投稿"
-      fill_in "Description", with: "詳細を編集した"
-      click_button "投稿"
+    fill_in "Title", with: "編集済み投稿"
+    fill_in "Description", with: "詳細を編集した"
+    click_button "投稿"
 
-      # 投稿を編集しましたと表示されるか確認
+    it "投稿を編集しましたと表示される" do
       expect(page).to have_content "投稿を編集しました"
-      # 編集済み投稿Aが表示されていることを確認
+    end
+
+    it "編集済み投稿Aが表示されている" do
       expect(page).to have_content "編集済み投稿"
     end
   end
@@ -106,11 +110,15 @@ describe "投稿機能", type: :system do
     end
 
     context "OKを押した場合" do
-      it "テスト投稿は削除される" do
+      before do
         page.accept_confirm "投稿削除します。よろしいですか？"
+      end
 
+      it "投稿を削除しましたと表示される" do
         expect(page).to have_content "投稿を削除しました"
+      end
 
+      it "テスト投稿は削除される" do
         expect(page).not_to have_content "テスト投稿"
       end
     end
