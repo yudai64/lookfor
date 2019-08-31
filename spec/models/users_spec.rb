@@ -29,17 +29,12 @@ RSpec.describe User, type: :model do
       expect(user2.valid?).to eq(false)
     end
 
-    it "is invalid without a password" do
-      user = build(:user, password: nil)
-      expect(user).not_to be_valid
-    end
-
     it "is invalid without a password_confirmation" do
       user = build(:user, password: nil)
       expect(user).not_to be_valid
     end
 
-    it "is invalid with password_confirmation that do not match password" do
+    it "is invalid with not match password_confirmation" do
       user = build(:user, password_confirmation: "password2")
       user.valid?
       expect(user.valid?).to eq(false)
