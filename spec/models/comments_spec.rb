@@ -15,7 +15,7 @@ RSpec.describe Comment, type: :model do
 
   describe "Association" do
     let(:association) do
-      described_class.reflect_on_association(target)
+      Comment.reflect_on_association(target)
     end
 
     context "user" do
@@ -23,7 +23,7 @@ RSpec.describe Comment, type: :model do
 
       it { expect(association.macro).to eq :belongs_to }
 
-      it { expect(association.class_name).to eq "User"}
+      it { expect(association.class_name).to eq "User" }
     end
 
     context "post" do

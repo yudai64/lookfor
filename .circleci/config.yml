@@ -75,6 +75,10 @@ jobs:
           name: Rspec
           command: bundle exec rspec
 
+      - run:
+          name: rubocop
+          command: bundle exec rubocop
+
       # collect reports
       - store_test_results:
           path: /tmp/test-results

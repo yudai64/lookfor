@@ -29,17 +29,12 @@ RSpec.describe User, type: :model do
       expect(user2.valid?).to eq(false)
     end
 
-    it "is invalid without a password" do
-      user = build(:user, password: nil)
-      expect(user).not_to be_valid
-    end
-
     it "is invalid without a password_confirmation" do
       user = build(:user, password: nil)
       expect(user).not_to be_valid
     end
 
-    it "is invalid with password_confirmation that do not match password" do
+    it "is invalid with not match password_confirmation" do
       user = build(:user, password_confirmation: "password2")
       user.valid?
       expect(user.valid?).to eq(false)
@@ -48,7 +43,7 @@ RSpec.describe User, type: :model do
 
   describe "Association" do
     let(:association) do
-      described_class.reflect_on_association(target)
+      User.reflect_on_association(target)
     end
 
     context "post" do
@@ -56,12 +51,12 @@ RSpec.describe User, type: :model do
 
       it { expect(association.macro).to eq :has_many }
 
-      it { expect(association.class_name).to eq "Post"}
+      it { expect(association.class_name).to eq "Post" }
 
       it "destroyed when user destroyed" do
         user = create(:user)
         user.posts.create!(title: "これはタイトルです", description: "これは詳細です")
-        expect{ user.destroy }.to change{ Post.count }.by(-1)
+        expect { user.destroy }.to change { Post.count }.by(-1)
       end
     end
 
@@ -70,13 +65,13 @@ RSpec.describe User, type: :model do
 
       it { expect(association.macro).to eq :has_many }
 
-      it { expect(association.class_name).to eq "Comment"}
+      it { expect(association.class_name).to eq "Comment" }
 
       it "destroyed when user destroyed" do
         user = create(:user)
         post = create(:post, user: user)
         user.comments.create!(content: "contentです", post: post)
-        expect{ user.destroy }.to change{ Comment.count }.by(-1)
+        expect { user.destroy }.to change { Comment.count }.by(-1)
       end
     end
   end
