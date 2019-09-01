@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
@@ -79,16 +79,49 @@ jobs:
           name: rubocop
           command: bundle exec rubocop
 
-      - deploy:
-          name: Deploy Master to Heroku
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-            fi
-
       # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+  deploy:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+    working_directory: ~/lookfor
+
+    steps:
+      - checkout
+      - run:
+          name: 'Install Heroku CLI, if necessary'
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              echo "Heroku is already installed. No operation was performed."
+            fi
+      - run:
+          name: heroku maintenance on
+          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
+      - run:
+          name: Deploy to Heroku_Staging
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGE.git master
+      - run:
+          name: heroku maintenance off
+          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+      - deploy:
+        requires:
+          - test
+        filters:
+          branches:
+            only:
+              - master
