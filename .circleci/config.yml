@@ -125,3 +125,4 @@ workflows:
             branches:
               only:
                 - master
+                - feature/yudai64/2019/0826/introduce_circleci
