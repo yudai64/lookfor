@@ -1,0 +1,10 @@
+h1.mb-5
+  | 投稿一覧
+- @posts.each do |post|
+  .card.border-dark.mb-3
+    .card-header
+      = link_to post.user.name, post.user
+    .card-body
+      = link_to post.title, post
+    .card-footer.text-right
+      = "更新日 #{post.updated_at}"

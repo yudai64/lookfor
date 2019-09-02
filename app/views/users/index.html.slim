@@ -1,0 +1,20 @@
+h1
+  | ユーザー一覧
+table.table
+  thead
+    tr
+      th
+        | 名前
+      th
+        | 一言
+      th
+        | ライン
+  - @users.each do |user|
+    tbody
+      tr
+        td
+          = link_to user.name, user
+        td
+          = user.word
+        td
+          = user.url
