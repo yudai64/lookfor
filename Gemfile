@@ -74,5 +74,3 @@ gem "bootstrap"
 gem "bootstrap_form"
 
 gem "slim-rails"
-
-gem "html2slim"
