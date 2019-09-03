@@ -17,6 +17,14 @@ table.table.mt-5
         | 更新日
       td
         = @post.updated_at
+
+  - if @post.image.attached?
+    tr
+      th
+        | シフト表
+      td
+        = image_tag @post.image
+
 h5.mt-5
   | コメント一覧
 - @comments.each do |comment|
