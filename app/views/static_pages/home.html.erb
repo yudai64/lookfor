@@ -1,9 +1,0 @@
-<div class="top-main">
-  <h1 class="mt-5 text-center">Look For</h1>
-  <p class="mt-5 text-center">バイトの代わりを気軽に探すサービスです。</p>
-  <% if logged_in? %>
-    <%= link_to "投稿しに行く", new_post_path, class: "btn btn-secondary text-center mt-3"%>
-  <% else %>
-    <%= link_to "登録して始める", new_user_path, class: "btn btn-secondary text-center mt-3"%>
-  <% end %>
-</div>

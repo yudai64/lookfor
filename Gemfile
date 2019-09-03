@@ -72,3 +72,5 @@ gem "bcrypt"
 gem "bootstrap"
 
 gem "bootstrap_form"
+
+gem "slim-rails"

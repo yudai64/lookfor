@@ -1,0 +1,4 @@
+= bootstrap_form_with model: post, local: true do |f|
+  = f.text_field :title, :placeholder => "タイトルを入力してください"
+  = f.text_area :description, :placeholder => "詳細を入力してください", rows: 5
+  = f.submit "投稿"

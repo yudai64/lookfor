@@ -1,0 +1,8 @@
+h1
+  | ログイン
+= bootstrap_form_with(scope: :session, local: true) do |f|
+  = f.email_field :email, :placeholder => "メールアドレスを入力してください"
+  = f.password_field :password, :placeholder => "パスワードを入力してください"
+  = f.submit "login"
+.mt-4
+  = link_to "新規登録はこちらから", new_user_path

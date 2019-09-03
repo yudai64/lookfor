@@ -1,0 +1,4 @@
+h1
+  | ユーザー登録画面
+= bootstrap_form_with url: users_path, model: @user, local: true do |form|
+  = render partial: 'shared/form', locals: { f: form }

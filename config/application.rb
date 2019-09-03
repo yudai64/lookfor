@@ -15,6 +15,7 @@ module Lookfor
       g.assets false
       g.helper false
       g.test_framework false
+      g.template_engine :slim
     end
 
     config.time_zone = "Asia/Tokyo"
