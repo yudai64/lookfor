@@ -4,7 +4,7 @@ describe "投稿機能", type: :system do
   let(:user) { create(:user) }
 
   before do
-    file = fixture_file_upload("/test.jpg", 'image/jpg')
+    file = fixture_file_upload("/test.jpg", "image/jpg")
     post = create(:post, user: user, image: file)
     create(:comment, user: user, post: post)
     login(user)
@@ -76,7 +76,7 @@ describe "投稿機能", type: :system do
       expect(page).to have_content "テストコメント"
     end
 
-    it "画像が表示される"do
+    it "画像が表示される" do
       expect(page).to have_selector("img[src$='test.jpg']")
     end
   end
