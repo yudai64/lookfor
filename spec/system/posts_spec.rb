@@ -75,6 +75,10 @@ describe "投稿機能", type: :system do
     it "テスト投稿のコメントが表示される" do
       expect(page).to have_content "テストコメント"
     end
+
+    it "画像が表示される"do
+      expect(page).to have_selector("img[src$='test.jpg']")
+    end
   end
 
   describe "投稿編集機能" do
