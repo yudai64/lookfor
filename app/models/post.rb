@@ -4,4 +4,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   validates :title, presence: true
   validates :description, presence: true
+
+  def resize
+    return self.image.variant(resize: "800x1400")
+  end
 end
