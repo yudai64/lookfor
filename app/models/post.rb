@@ -6,6 +6,6 @@ class Post < ApplicationRecord
   validates :description, presence: true
 
   def resize
-    return self.image.variant(resize: "800x1400")
+    self.image.variant(resize: "800x1400")
   end
 end
