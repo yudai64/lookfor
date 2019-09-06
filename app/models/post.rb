@@ -5,7 +5,4 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-  def resize
-    self.image.variant(resize: "800x1400")
-  end
 end
