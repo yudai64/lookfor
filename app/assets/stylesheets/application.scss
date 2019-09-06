@@ -2,9 +2,10 @@
 @import "rails_bootstrap_forms";
 
 body {
+  background-attachment: fixed;
   background-image: url("/images/coffee.png");
   background-size: cover;
-  height: 600px;
+  height: 800px;
 }
 
 .top-main {
