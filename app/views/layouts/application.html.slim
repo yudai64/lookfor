@@ -11,8 +11,6 @@ html
     = render 'layouts/header'
     .container
       - flash.each do |name, msg|
-        |  <div class="alert alert-
-        = name
-        | ">
-        = msg.html_safe
+        .alert class="alert-#{name}"
+          = msg.html_safe
       = yield
