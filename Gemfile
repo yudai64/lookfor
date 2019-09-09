@@ -76,3 +76,5 @@ gem "bootstrap_form"
 gem "slim-rails"
 
 gem "aws-sdk-s3", require: false
+
+gem "devise"
