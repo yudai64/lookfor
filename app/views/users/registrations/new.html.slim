@@ -1,0 +1,5 @@
+h2
+  | Sign up
+= bootstrap_form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |form|
+  = render partial: 'shared/form', locals: { f: form }
+= render "users/shared/links"

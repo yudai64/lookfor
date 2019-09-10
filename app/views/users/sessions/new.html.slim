@@ -1,0 +1,7 @@
+h2
+  | Log in
+= bootstrap_form_with(scope: :session, id: 'new_user', class: 'new_user', local: true) do |f|
+  = f.email_field :email, :placeholder => "メールアドレスを入力してください"
+  = f.password_field :password, :placeholder => "パスワードを入力してください"
+  = f.submit "login"
+= render "users/shared/links"
