@@ -6,13 +6,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
-  #   super
+    # super
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to profile_path, success: "登録しました"
+    else
+      render :new
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +65,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :word, :url)
+    end
 end
