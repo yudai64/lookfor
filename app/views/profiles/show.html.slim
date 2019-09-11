@@ -12,12 +12,10 @@ table.table.mt-5
         | ライン
       td
         = current_user.url
-= link_to "編集する", edit_profile_path
-h4.mt-5
-  | アカウント削除
-= link_to "delete account", profile_path, method: :delete, data: { confirm: "アカウント削除します。よろしいですか？" }
+= link_to "編集する", edit_user_registration_path
+
 h3.mt-5
-  | 投稿
+  | 過去の投稿
 - @posts.each do |post|
   .card.border-dark.mb-3
     .card-header
