@@ -61,7 +61,9 @@ ja:
   activerecord:
     attributes:
       user:
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: 確認用パスワード
-        remember_me: 次回から自動的にログイン
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        word: "一言"
+        url: "URL"
+        remember_me: "次回から自動的にログイン"
