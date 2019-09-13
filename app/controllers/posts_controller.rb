@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user, only: [:index]
+
   def index
     @posts = Post.all.order(updated_at: "DESC")
   end

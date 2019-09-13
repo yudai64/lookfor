@@ -55,37 +55,35 @@ describe "ユーザー機能", type: :system do
   describe "自ユーザー編集機能" do
     before do
       visit profile_path
-      visit edit_profile_path
+      visit edit_user_registration_path
     end
 
     it "ユーザーは編集される" do
-      expect(page).to have_field "Name", with: "テストユーザー"
+      expect(page).to have_field "名前", with: "テストユーザー"
 
-      expect(page).to have_field "Email", with: "test@example.com"
+      expect(page).to have_field "メールアドレス", with: "test@example.com"
 
-      fill_in "Name", with: "編集済みユーザー"
-      fill_in "Email", with: "edit@example.com"
-      click_button "Update User"
+      fill_in "名前", with: "編集済みユーザー"
+      fill_in "メールアドレス", with: "edit@example.com"
+      fill_in "現在のパスワード", with: "password"
+      click_button "Update"
 
-      expect(page).to have_content "編集しました"
-
-      expect(page).to have_content "編集済みユーザー"
+      expect(page).to have_content "アカウント情報を変更しました。"
     end
   end
 
   describe "自ユーザー削除機能" do
     before do
       visit profile_path
-      click_link "delete account"
+      visit edit_user_registration_path
+      click_button "アカウント削除"
     end
 
     context "OKを押した場合" do
       it "テストユーザーは削除される" do
         page.accept_confirm "アカウント削除します。よろしいですか？"
 
-        expect(page).to have_content "ユーザー削除しました"
-
-        expect(page).not_to have_content "テストユーザー"
+        expect(page).to have_content "アカウントを削除しました。またのご利用をお待ちしております。"
       end
     end
 
@@ -93,7 +91,7 @@ describe "ユーザー機能", type: :system do
       it "ユーザーAは削除されない" do
         page.dismiss_confirm "アカウント削除します。よろしいですか？"
 
-        expect(page).to have_content "テストユーザー"
+        expect(page).to have_content "アカウントを削除する"
       end
     end
   end

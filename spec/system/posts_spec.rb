@@ -13,8 +13,8 @@ describe "投稿機能", type: :system do
   describe "新規投稿機能" do
     before do
       visit new_post_path
-      fill_in "Title", with: post_title
-      fill_in "Description", with: post_description
+      fill_in "タイトル", with: post_title
+      fill_in "詳細", with: post_description
       click_button "投稿"
     end
 
@@ -27,21 +27,21 @@ describe "投稿機能", type: :system do
       end
     end
 
-    context "Titleが空欄のとき" do
+    context "タイトルが空欄のとき" do
       let(:post_title) { "" }
       let(:post_description) { "新規投稿のタイトル" }
 
       it "失敗する" do
-        expect(page).to have_content "can't be blank"
+        expect(page).to have_content "タイトルが入力されていません。"
       end
     end
 
-    context "Descriptionが空欄のとき" do
+    context "詳細が空欄のとき" do
       let(:post_title) { "新規投稿の詳細" }
       let(:post_description) { "" }
 
       it "失敗する" do
-        expect(page).to have_content "can't be blank"
+        expect(page).to have_content "詳細が入力されていません。"
       end
     end
   end
@@ -88,12 +88,12 @@ describe "投稿機能", type: :system do
     end
 
     it "投稿は編集される" do
-      expect(page).to have_field "Title", with: "テスト投稿"
+      expect(page).to have_field "タイトル", with: "テスト投稿"
 
-      expect(page).to have_field "Description", with: "これはテスト詳細です"
+      expect(page).to have_field "詳細", with: "これはテスト詳細です"
 
-      fill_in "Title", with: "編集済み投稿"
-      fill_in "Description", with: "詳細を編集した"
+      fill_in "タイトル", with: "編集済み投稿"
+      fill_in "詳細", with: "詳細を編集した"
       click_button "投稿"
 
       expect(page).to have_content "投稿を編集しました"

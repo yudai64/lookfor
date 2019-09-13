@@ -1,0 +1,38 @@
+h2
+  | 新規登録
+= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+  = render "devise/shared/error_messages", resource: resource
+  .form-group
+    = f.label :name
+    br
+    = f.text_field :name, autofocus: true, class: "form-control"
+  .form-group
+    = f.label :email
+    br
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+  .form-group
+    = f.label :password
+    - if @minimum_password_length
+      em
+        | (
+        = @minimum_password_length
+        |  characters minimum)
+    br
+    = f.password_field :password, autocomplete: "new-password", class: "form-control"
+  .form-group
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+  .form-group
+    = f.label :word
+    br
+    = f.text_field :word, autofocus: true, class: "form-control"
+  .form-group
+    = f.label :url
+    br
+    = f.text_field :url, autofocus: true, class: "form-control"
+  .actions
+    = f.submit "Sign up", class: "btn, btn-primary"
+    br
+.mt-3
+  = link_to "ログインはこちら", new_user_session_path
