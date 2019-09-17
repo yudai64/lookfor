@@ -80,3 +80,5 @@ gem "aws-sdk-s3", require: false
 gem "devise"
 
 gem "omniauth-line"
+
+gem "dotenv-rails"
