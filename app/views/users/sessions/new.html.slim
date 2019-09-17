@@ -15,5 +15,6 @@ h2
       = f.label :remember_me
   div
     = f.submit "Sign in", class: "btn, btn-primary"
+= link_to "LINE Login", user_line_omniauth_authorize_path
 .mt-3
   = link_to "新規登録はこちら", new_user_registration_path
