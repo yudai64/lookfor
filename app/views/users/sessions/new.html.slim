@@ -14,7 +14,11 @@ h2
       = f.check_box :remember_me
       = f.label :remember_me
   div
-    = f.submit "Sign in", class: "btn, btn-primary"
-= link_to "LINE Login", user_line_omniauth_authorize_path
+    = f.submit " Log in ", class: "btn btn-primary"
+.mt-3
+  = link_to (user_line_omniauth_authorize_path) do
+    = image_tag( "/images/btn_login_base.png", :size => "150x42")
+
+
 .mt-3
   = link_to "新規登録はこちら", new_user_registration_path
