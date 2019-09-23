@@ -7,13 +7,9 @@ class User < ApplicationRecord
   validates :name,
             presence: true,
             length: { maximum: 12 }
-  validates :email,
-            presence: true,
-            uniqueness: true
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :social_profiles, dependent: :destroy
 
   def social_profile(provider)
     social_profiles.select{ |sp| sp.provider == provider.to_s }.first
@@ -35,4 +31,5 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
+
 end
