@@ -68,17 +68,10 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bcrypt"
-
 gem "bootstrap"
-
 gem "bootstrap_form"
-
 gem "slim-rails"
-
 gem "aws-sdk-s3", require: false
-
 gem "devise"
-
 gem "omniauth-line"
-
 gem "dotenv-rails"
