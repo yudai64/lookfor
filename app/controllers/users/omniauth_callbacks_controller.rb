@@ -8,8 +8,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "ログインしました。"
       sign_in_and_redirect @user
     else
-      session["devise.#{line}_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
+      @user.save
+      sign_in_and_redirect @user
     end
   end
 end
