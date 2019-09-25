@@ -16,17 +16,9 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-
-    unless user
-      user = User.new(
-        uid: auth.uid,
-        provider: auth.provider,
-        password: Devise.friendly_token[0, 20],
-        name: auth.info.name
-      )
+    find_or_initialize_by(uid: auth.uid, provider: auth.provider) do |user|
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name
     end
-
-    user
   end
 end
