@@ -6,7 +6,7 @@ module OmniauthMacros
         uid: "12345",
         info: {
           name: user
-        }
+        },
         credentials: {
           token: "hogefuga"
         }
