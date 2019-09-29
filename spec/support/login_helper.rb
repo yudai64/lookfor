@@ -1,9 +1,9 @@
 module LoginHelpers
   # ログインする
   def login(user)
-    visit new_user_session_path
-    fill_in "メールアドレス", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "Sign in"
+    OmniAuth.config.mock_auth[:line] = nil
+    Rails.application.env_config["omniauth.auth"] = line_mock(user)
+    visit user_line_omniauth_authorize_path
+    click_button "ログイン"
   end
 end

@@ -1,24 +1,27 @@
-# README
+# 概要
+lookforは気軽にバイトの代わりを探すサービスです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# なんで作ったのか
+* 遊びの予定入れたくて代わりを見つけたい。。
+* 一人一人代わりのお願いするのは面倒だけど、全体ラインで聞くのは少し気まずい。。
+* シフトもっと入れとけば良かった。。
+* 誰か代わり探してる人いないかな。。
 
-Things you may want to cover:
+そんな思いを解決したいと思って作りました。
 
-* Ruby version
+# 何ができるのか
+lookforでは以下のことができます。
+* ユーザー登録、編集、削除
+* 変わって欲しい日にち、詳細の投稿
+* 投稿の編集、削除
+* シフト表の添付
+* 投稿一覧の表示
+* 投稿に関するコメント
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 使用した技術
+* devise,omniauth(LINEアカウントによるログイン機能)
+* heroku
+* Active Storage,S3(画像の投稿、保存)
+* rspec,rubocop
+* CircleCI(リモートブランチにプッシュ時に自動テスト、マスターブランチにマージ時に自動デプロイ)
